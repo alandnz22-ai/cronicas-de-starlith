@@ -4,388 +4,536 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10091e">
 <title>Crônicas de Starlith</title>
 
+<style>
+:root {
+  --bg: #100b1b;
+  --panel: #1c122c;
+  --purple: #914ee8;
+  --gold: #f4c66c;
+  --text: #fff4ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, Arial, sans-serif;
+}
+button { font: inherit; cursor: pointer; }
+header {
+  text-align: center;
+  padding: 30px 14px 24px;
+  background:
+    radial-gradient(ellipse at 50% 0%, #6731a5 0%, transparent 60%),
+    linear-gradient(145deg, #291343, #100b1b);
+  border-bottom: 1px solid #71449a;
+}
+.logo { font-size: 38px; }
+h1 {
+  margin: 6px 0;
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 7vw, 40px);
+  color: #f2d5ff;
+  text-shadow: 0 0 18px #a85cff;
+}
+header p { color: #d3b9e9; margin-bottom: 0; }
+main { max-width: 1000px; margin: auto; padding: 16px; }
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 24px;
+}
+.pill {
+  background: #291a3d;
+  border: 1px solid #79519b;
+  border-radius: 25px;
+  padding: 10px 15px;
+}
+h2 {
+  text-align: center;
+  color: #e6c6ff;
+  font-family: Georgia, serif;
+}
 .packs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
-
-.pack.cosmic {
-  overflow: hidden;
-  padding: 14px;
-  border: 1px solid #7650a8;
-  border-radius: 18px;
-  background: linear-gradient(160deg, #28133f, #100b1d);
-  box-shadow: 0 0 18px #6d32a522;
+.pack {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #68428a;
+  border-radius: 17px;
+  text-align: center;
+  background: linear-gradient(155deg, #29183c, #120d20);
+  box-shadow: 0 5px 18px #0005;
 }
-
+.pack h3 { font-size: 17px; margin: 15px 0 7px; }
+.pack p { color: #cbb9db; font-size: 13px; min-height: 35px; }
 .booster {
   position: relative;
+  min-height: 235px;
   overflow: hidden;
-  min-height: 255px;
-  padding: 20px 10px;
-  border: 3px solid #d9a34b;
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
+  padding: 17px 8px;
+  border: 3px solid var(--gold);
+  border-radius: 11px;
   background:
-    radial-gradient(ellipse at center, #783ad5 0%, transparent 60%),
-    linear-gradient(145deg, #35105d, #100b25 55%, #542078);
-  box-shadow: inset 0 0 20px #e7b9ff55,
-              0 0 16px #9d4dff44;
-  transition: transform .25s, box-shadow .25s;
+    radial-gradient(ellipse at 50% 38%, #7838c8 0%, transparent 58%),
+    linear-gradient(150deg, #38165e, #10091e 60%, #55236e);
+  box-shadow: inset 0 0 24px #d7a2ff45, 0 0 13px #8b45d744;
+  transition: transform .2s, box-shadow .2s;
+  cursor: pointer;
 }
-
 .booster:active {
   transform: scale(.96);
-  box-shadow: 0 0 28px #c77dff;
+  box-shadow: 0 0 28px #d09aff;
 }
-
 .booster::before {
   content: "";
   position: absolute;
-  inset: 8px;
-  border: 1px solid #f5d28b;
-  border-radius: 7px;
+  inset: 7px;
+  border: 1px solid #ffe3a0;
+  border-radius: 5px;
   pointer-events: none;
 }
-
-.booster-stars {
-  color: #ffe7a1;
-  font-size: 25px;
-  letter-spacing: 8px;
-  animation: starPulse 1.8s infinite alternate;
+.booster::after {
+  content: "✦  ✧  ✦";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  color: #ffe6a1;
+  letter-spacing: 7px;
+  animation: twinkle 1.7s infinite alternate;
 }
-
-.booster-dragon {
-  margin: 18px 0;
-  font-size: 65px;
-  filter: drop-shadow(0 0 12px #c17bff);
+.booster-symbol {
+  font-size: 64px;
+  margin: 27px 0 12px;
+  filter: drop-shadow(0 0 12px #d5a2ff);
+  animation: float 3s ease-in-out infinite;
 }
-
 .booster-title {
-  position: relative;
-  color: #ffe0a0;
+  color: #ffe1a0;
   font-family: Georgia, serif;
-  font-size: clamp(17px, 4vw, 23px);
   font-weight: bold;
-  text-shadow: 0 0 12px #b36bff;
+  font-size: clamp(17px, 4vw, 23px);
+  line-height: 1.1;
+  text-shadow: 0 0 12px #bb76ff;
 }
-
 .booster-label {
-  margin-top: 15px;
-  padding: 7px 3px;
-  color: #fff0cb;
-  border-top: 1px solid #d9a34b;
-  border-bottom: 1px solid #d9a34b;
-  font-size: 11px;
+  margin-top: 13px;
+  padding: 7px 1px;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  color: #fff0ca;
+  font-size: 10px;
   letter-spacing: 2px;
 }
-
-.booster.abyss {
+.abyss {
+  border-color: #a9a0ff;
   background:
-    radial-gradient(ellipse at center, #3f279c, transparent 65%),
-    linear-gradient(145deg, #171b4c, #0a0a20 55%, #421565);
-  border-color: #9b8cff;
+    radial-gradient(ellipse at center, #3b339a, transparent 62%),
+    linear-gradient(145deg, #1b1c52, #0c0a20 60%, #42165c);
 }
-
-.booster.celestial {
+.celestial {
+  border-color: #ffe18a;
   background:
-    radial-gradient(ellipse at center, #875020, transparent 65%),
-    linear-gradient(145deg, #60401b, #211126 55%, #6c3260);
+    radial-gradient(ellipse at center, #95602a, transparent 62%),
+    linear-gradient(145deg, #63431c, #241127 60%, #683264);
 }
-
-@keyframes starPulse {
-  from { opacity: .55; transform: scale(.96); }
-  to { opacity: 1; transform: scale(1.05); }
+.forest {
+  background:
+    radial-gradient(ellipse at center, #23784c, transparent 62%),
+    linear-gradient(145deg, #164b37, #101323 60%, #245b45);
 }
-
-@media (max-width: 360px) {
+.primary {
+  width: 100%;
+  padding: 12px 8px;
+  border: 1px solid #d9a7ff;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(100deg, #6733a6, #a052e5);
+  box-shadow: 0 0 12px #883edb44;
+}
+.primary:disabled { opacity: .45; cursor: not-allowed; }
+.secondary {
+  padding: 10px 14px;
+  border: 1px solid #765092;
+  border-radius: 9px;
+  background: #291a3d;
+  color: #f7eaff;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 23px 0;
+}
+#message {
+  min-height: 25px;
+  text-align: center;
+  color: #e4c4ff;
+  margin: 15px 0;
+}
+.section-title { margin-top: 30px; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.card {
+  min-width: 0;
+  overflow: hidden;
+  padding: 11px 8px;
+  border: 2px solid #777;
+  border-radius: 13px;
+  text-align: center;
+  background: linear-gradient(155deg, #30213f, #15101f);
+  animation: reveal .45s ease both;
+}
+.card-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 112px;
+  font-size: 60px;
+  filter: drop-shadow(0 0 8px #ffffff22);
+}
+.card h3 { font-size: 15px; margin: 7px 0; }
+.card p { margin: 7px 0; color: #d5c4e4; font-size: 13px; }
+.Common { border-color: #777; }
+.Rare { border-color: #40bce9; box-shadow: 0 0 10px #40bce922; }
+.Epic { border-color: #b36aff; box-shadow: 0 0 12px #9b4bff33; }
+.Legendary { border-color: #ffc24e; box-shadow: 0 0 14px #ffb62f44; }
+.Mythic { border-color: #ff5fae; box-shadow: 0 0 15px #ff388744; }
+.Starlith {
+  border-color: #efd5ff;
+  background: linear-gradient(145deg, #532c78, #171027, #51366e);
+  box-shadow: 0 0 20px #bd81ff88;
+  animation: starlithGlow 2s infinite alternate;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 15px;
+  background: #ffffff12;
+  font-size: 11px;
+  letter-spacing: .5px;
+}
+.hidden { display: none !important; }
+.empty {
+  grid-column: 1 / -1;
+  padding: 24px;
+  color: #b9a5cc;
+  text-align: center;
+}
+footer {
+  text-align: center;
+  padding: 24px 12px;
+  color: #9682ab;
+  font-size: 12px;
+}
+@keyframes twinkle {
+  from { opacity: .5; }
+  to { opacity: 1; text-shadow: 0 0 15px #fff; }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(12px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes starlithGlow {
+  from { box-shadow: 0 0 9px #a46bdb; }
+  to { box-shadow: 0 0 24px #edceff; }
+}
+@media (min-width: 600px) {
+  .packs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 350px) {
   .packs { grid-template-columns: 1fr; }
   .booster { min-height: 220px; }
 }
-  <style>
-*{box-sizing:border-box}
-body{margin:0;background:#100d1b;color:#f7edff;font-family:system-ui,Arial,sans-serif}
-header{text-align:center;padding:24px 12px;background:linear-gradient(135deg,#251446,#101020);border-bottom:1px solid #754ca0}
-h1{color:#e4c6ff;margin:5px;font-size:clamp(25px,6vw,38px)}
-header p{color:#c8b5df}
-main{max-width:900px;margin:auto;padding:16px}
-.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:15px 0}
-.pill{background:#251c38;border:1px solid #61417f;border-radius:20px;padding:9px 15px}
-h2{text-align:center;color:#e4c6ff}
-.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
-.pack{background:#1b142b;border:1px solid #624184;border-radius:14px;padding:15px 10px;text-align:center}
-.pack .symbol{font-size:48px}
-.pack h3{margin:8px 0}
-button{background:#8651c7;color:white;border:0;border-radius:10px;padding:12px;font-weight:bold;cursor:pointer}
-button:active{transform:scale(.97)}
-.pack button{width:100%}
-button:disabled{opacity:.45}
-.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0}
-.actions button{background:#332444}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
-.card{position:relative;text-align:center;background:linear-gradient(155deg,#302044,#15111f);border:2px solid #65527b;border-radius:13px;padding:12px 8px;min-width:0;overflow:hidden}
-.art{font-size:58px;padding:12px 0}
-.card h3{font-size:16px;margin:5px 0}
-.card p{font-size:12px;color:#d1c2e0}
-.Common{border-color:#777}
-.Rare{border-color:#43b9dc}
-.Epic{border-color:#b16bff}
-.Legendary{border-color:#ffb83f;box-shadow:0 0 10px #a66b25}
-.Mythic{border-color:#ff5d9e;box-shadow:0 0 12px #9e316b}
-.Starlith{border-color:#e4c7ff;box-shadow:0 0 20px #b77cff;background:linear-gradient(145deg,#4c2873,#17102d,#543c72);animation:shine 2s infinite alternate}
-@keyframes shine{from{box-shadow:0 0 8px #9c6dd8}to{box-shadow:0 0 24px #e5c7ff}}
-.hidden{display:none!important}
-#message{text-align:center;min-height:26px;color:#e6d0ff}
-footer{text-align:center;color:#9585a8;font-size:12px;padding:25px}
 </style>
 </head>
+
 <body>
 <header>
-  <div style="font-size:38px">🌌🐉✨</div>
+  <div class="logo">🌌 🐉 ✨</div>
   <h1>Crônicas de Starlith</h1>
   <p>Abra portais. Colecione lendas. Descubra seu destino.</p>
 </header>
+
 <main>
-  <div style="text-align:center;margin:15px">
-  <button onclick="essence += 500; save(); alert('Você ganhou 500 Essências! ✨')">
-    🎁 Ganhar 500 Essências grátis
-  </button>
-  </div>
   <div class="stats">
     <div class="pill">✨ Essências: <b id="essence">250</b></div>
     <div class="pill">📜 Cartas: <b id="total">0</b></div>
   </div>
 
-  <h2>Escolha seu portal</h2>
-  
-<div class="packs">
-  <div class="pack cosmic">
-    <div class="booster" onclick="openPack(0)">
-      <div class="booster-stars">✦ ✧ ✦</div>
-      <div class="booster-dragon">🐉</div>
-      <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
-      <div class="booster-label">PACOTE DE CARTAS</div>
-      <div class="booster-glow"></div>
-    </div>
-    <h3>🌳 Ecos da Floresta</h3>
-    <p>Elfos, druidas e feras antigas.</p>
-    <button onclick="openPack(0)">Abrir · 100 ✨</button>
-  </div>
+  <h2>✦ Escolha seu portal ✦</h2>
 
-  <div class="pack cosmic">
-    <div class="booster abyss" onclick="openPack(1)">
-      <div class="booster-stars">✦ ✧ ✦</div>
-      <div class="booster-dragon">🦑</div>
-      <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
-      <div class="booster-label">PACOTE DE CARTAS</div>
-      <div class="booster-glow"></div>
-    </div>
-    <h3>🌑 Chamado do Abismo</h3>
-    <p>Monstros, sombras e magia proibida.</p>
-    <button onclick="openPack(1)">Abrir · 100 ✨</button>
-  </div>
-
-  <div class="pack cosmic">
-    <div class="booster celestial" onclick="openPack(2)">
-      <div class="booster-stars">✦ ✧ ✦</div>
-      <div class="booster-dragon">👑</div>
-      <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
-      <div class="booster-label">PACOTE DE CARTAS</div>
-      <div class="booster-glow"></div>
-    </div>
-    <h3>☀️ Trono Celestial</h3>
-    <p>Dragões, campeões e deuses.</p>
-    <button onclick="openPack(2)">Abrir · 100 ✨</button>
-  </div>
-</div>
-  
-    <div class="pack">
-      <div class="symbol">🌳</div>
-      <h3>Ecos da Floresta</h3>
+  <div class="packs">
+    <section class="pack">
+      <div class="booster forest" onclick="openPack(0)" role="button" tabindex="0" aria-label="Abrir booster Ecos da Floresta">
+        <div class="booster-symbol">🐉</div>
+        <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
+        <div class="booster-label">PACOTE DE CARTAS</div>
+      </div>
+      <h3>🌳 Ecos da Floresta</h3>
       <p>Elfos, druidas e feras antigas.</p>
-      <button onclick="openPack(0)">Abrir · 100 ✨</button>
-    </div>
-    <div class="pack">
-      <div class="symbol">🦑</div>
-      <h3>Chamado do Abismo</h3>
+      <button class="primary" onclick="openPack(0)">Abrir · 100 ✨</button>
+    </section>
+
+    <section class="pack">
+      <div class="booster abyss" onclick="openPack(1)" role="button" tabindex="0" aria-label="Abrir booster Chamado do Abismo">
+        <div class="booster-symbol">🦑</div>
+        <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
+        <div class="booster-label">PACOTE DE CARTAS</div>
+      </div>
+      <h3>🌑 Chamado do Abismo</h3>
       <p>Monstros, sombras e magia proibida.</p>
-      <button onclick="openPack(1)">Abrir · 100 ✨</button>
-    </div>
-    <div class="pack">
-      <div class="symbol">👑</div>
-      <h3>Trono Celestial</h3>
+      <button class="primary" onclick="openPack(1)">Abrir · 100 ✨</button>
+    </section>
+
+    <section class="pack">
+      <div class="booster celestial" onclick="openPack(2)" role="button" tabindex="0" aria-label="Abrir booster Trono Celestial">
+        <div class="booster-symbol">👑</div>
+        <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
+        <div class="booster-label">PACOTE DE CARTAS</div>
+      </div>
+      <h3>☀️ Trono Celestial</h3>
       <p>Dragões, campeões e deuses.</p>
-      <button onclick="openPack(2)">Abrir · 100 ✨</button>
-    </div>
+      <button class="primary" onclick="openPack(2)">Abrir · 100 ✨</button>
+    </section>
   </div>
 
-  <p id="message" aria-live="polite"></p>
+  <p id="message" aria-live="polite">Escolha um portal para começar sua aventura.</p>
+
   <div class="actions">
-    <button onclick="showCollection()">📚 Minha coleção</button>
-    <button onclick="showPacks()">✨ Portais</button>
+    <button class="secondary" onclick="showCollection()">📚 Minha coleção</button>
+    <button class="secondary" onclick="showPortals()">✨ Ver portais</button>
+    <button class="secondary" onclick="claimEssence()">🎁 Recompensa diária</button>
   </div>
 
-  <section id="collection" class="hidden">
-    <h2>Minha coleção</h2>
-    <p style="text-align:center">As cartas que você descobriu nesta aventura.</p>
-    <div id="cards" class="cards"></div>
+  <section id="collection">
+    <h2 class="section-title" id="collectionTitle">✨ Cartas reveladas</h2>
+    <div id="cards" class="cards">
+      <div class="empty">Suas próximas lendas serão reveladas aqui.</div>
+    </div>
   </section>
 </main>
-<footer>Crônicas de Starlith · Sua lenda começa aqui.</footer>
+
+<footer>
+  Crônicas de Starlith · Mais que cartas, são lendas.
+</footer>
 
 <script>
-const allCards = [
- {name:"Lyria, Guardiã Verde",art:"🧝‍♀️",rarity:"Common",pack:0},
- {name:"Lobo de Musgo",art:"🐺",rarity:"Common",pack:0},
- {name:"Aprendiz Druida",art:"🌿",rarity:"Common",pack:0},
- {name:"Fada das Raízes",art:"🧚",rarity:"Rare",pack:0},
- {name:"Arqueiro Élfico",art:"🏹",rarity:"Rare",pack:0},
- {name:"Ent Ancestral",art:"🌲",rarity:"Epic",pack:0},
- {name:"Unicórnio Lunar",art:"🦄",rarity:"Epic",pack:0},
- {name:"Dragão Esmeralda",art:"🐉",rarity:"Legendary",pack:0},
- {name:"Rainha da Floresta",art:"👸",rarity:"Mythic",pack:0},
- {name:"Sylvaris, Alma Estelar",art:"🌟",rarity:"Starlith",pack:0},
+const cardData = [
+  {name:"Lyria, Guardiã Verde",art:"🧝‍♀️",rarity:"Common",pack:0},
+  {name:"Lobo de Musgo",art:"🐺",rarity:"Common",pack:0},
+  {name:"Aprendiz Druida",art:"🌿",rarity:"Common",pack:0},
+  {name:"Fada das Raízes",art:"🧚",rarity:"Rare",pack:0},
+  {name:"Arqueiro Élfico",art:"🏹",rarity:"Rare",pack:0},
+  {name:"Ent Ancestral",art:"🌲",rarity:"Epic",pack:0},
+  {name:"Unicórnio Lunar",art:"🦄",rarity:"Epic",pack:0},
+  {name:"Dragão Esmeralda",art:"🐉",rarity:"Legendary",pack:0},
+  {name:"Rainha da Floresta",art:"👸",rarity:"Mythic",pack:0},
+  {name:"Sylvaris, Alma Estelar",art:"🌟",rarity:"Starlith",pack:0},
 
- {name:"Espectro Perdido",art:"👻",rarity:"Common",pack:1},
- {name:"Caranguejo Sombrio",art:"🦀",rarity:"Common",pack:1},
- {name:"Cultista do Vazio",art:"🕯️",rarity:"Common",pack:1},
- {name:"Serpente Abissal",art:"🐍",rarity:"Rare",pack:1},
- {name:"Cavaleiro das Trevas",art:"🛡️",rarity:"Rare",pack:1},
- {name:"Kraken Ancião",art:"🦑",rarity:"Epic",pack:1},
- {name:"Hidra das Profundezas",art:"🐲",rarity:"Epic",pack:1},
- {name:"Devorador de Mundos",art:"👹",rarity:"Legendary",pack:1},
- {name:"Imperador do Abismo",art:"💀",rarity:"Mythic",pack:1},
- {name:"Nox, O Inominável",art:"🌑",rarity:"Starlith",pack:1},
+  {name:"Espectro Perdido",art:"👻",rarity:"Common",pack:1},
+  {name:"Caranguejo Sombrio",art:"🦀",rarity:"Common",pack:1},
+  {name:"Cultista do Vazio",art:"🕯️",rarity:"Common",pack:1},
+  {name:"Serpente Abissal",art:"🐍",rarity:"Rare",pack:1},
+  {name:"Cavaleiro das Trevas",art:"🛡️",rarity:"Rare",pack:1},
+  {name:"Kraken Ancião",art:"🦑",rarity:"Epic",pack:1},
+  {name:"Hidra das Profundezas",art:"🐲",rarity:"Epic",pack:1},
+  {name:"Devorador de Mundos",art:"👹",rarity:"Legendary",pack:1},
+  {name:"Imperador do Abismo",art:"💀",rarity:"Mythic",pack:1},
+  {name:"Nox, O Inominável",art:"🌑",rarity:"Starlith",pack:1},
 
- {name:"Escudeiro Real",art:"⚔️",rarity:"Common",pack:2},
- {name:"Sacerdotisa Solar",art:"☀️",rarity:"Common",pack:2},
- {name:"Grifo Celeste",art:"🦅",rarity:"Common",pack:2},
- {name:"Mago das Estrelas",art:"🧙",rarity:"Rare",pack:2},
- {name:"Paladina Radiante",art:"🗡️",rarity:"Rare",pack:2},
- {name:"Titã das Nuvens",art:"🌩️",rarity:"Epic",pack:2},
- {name:"Fênix Imperial",art:"🔥",rarity:"Epic",pack:2},
- {name:"Dragão Solar",art:"🐲",rarity:"Legendary",pack:2},
- {name:"Deusa do Firmamento",art:"🌠",rarity:"Mythic",pack:2},
- {name:"Aureon, Primeiro Astro",art:"🌌",rarity:"Starlith",pack:2}
+  {name:"Escudeiro Real",art:"⚔️",rarity:"Common",pack:2},
+  {name:"Sacerdotisa Solar",art:"☀️",rarity:"Common",pack:2},
+  {name:"Grifo Celeste",art:"🦅",rarity:"Common",pack:2},
+  {name:"Mago das Estrelas",art:"🧙",rarity:"Rare",pack:2},
+  {name:"Paladina Radiante",art:"🗡️",rarity:"Rare",pack:2},
+  {name:"Titã das Nuvens",art:"🌩️",rarity:"Epic",pack:2},
+  {name:"Fênix Imperial",art:"🔥",rarity:"Epic",pack:2},
+  {name:"Dragão Solar",art:"🐲",rarity:"Legendary",pack:2},
+  {name:"Deusa do Firmamento",art:"🌠",rarity:"Mythic",pack:2},
+  {name:"Aureon, Primeiro Astro",art:"🌌",rarity:"Starlith",pack:2}
 ];
 
-const rarityNames = {
- Common:"Comum",Rare:"Rara",Epic:"Épica",
- Legendary:"Lendária",Mythic:"Mítica",Starlith:"Starlith"
+const rarityLabels = {
+  Common:"Comum",
+  Rare:"Rara",
+  Epic:"Épica",
+  Legendary:"Lendária",
+  Mythic:"Mítica",
+  Starlith:"STARLITH ✦"
 };
 
 let essence = 250;
 let inventory = [];
-let seen = new Set();
-let collectionOpen = false;
+let lastPulls = [];
+let lastDaily = "";
+let seen = {};
 
-try {
- const saved = JSON.parse(localStorage.getItem("starlithSave") || "{}");
- if(Number.isFinite(saved.essence)) essence = saved.essence;
- if(Array.isArray(saved.inventory)) inventory = saved.inventory;
- if(Array.isArray(saved.seen)) seen = new Set(saved.seen);
-} catch(e) {}
-
-function save() {
- try {
-  localStorage.setItem("starlithSave", JSON.stringify({
-   essence, inventory, seen:[...seen]
-  }));
- } catch(e) {}
- update();
+function loadGame() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("starlithSave") || "{}");
+    if (Number.isFinite(saved.essence)) essence = saved.essence;
+    if (Array.isArray(saved.inventory)) inventory = saved.inventory;
+    if (saved.seen && typeof saved.seen === "object") seen = saved.seen;
+    if (typeof saved.lastDaily === "string") lastDaily = saved.lastDaily;
+  } catch (e) {
+    console.warn("Não foi possível carregar o progresso salvo.", e);
+  }
 }
 
-function update() {
- document.getElementById("essence").textContent = essence;
- document.getElementById("total").textContent = inventory.length;
+function saveGame() {
+  try {
+    localStorage.setItem("starlithSave", JSON.stringify({
+      essence, inventory, seen, lastDaily
+    }));
+  } catch (e) {
+    setMessage("Não foi possível salvar no navegador. Verifique o espaço disponível.");
+  }
+  updateStats();
 }
 
-function chooseRarity() {
- const r = Math.random()*100;
- if(r < 0.2) return "Starlith";
- if(r < 2) return "Mythic";
- if(r < 8) return "Legendary";
- if(r < 20) return "Epic";
- if(r < 45) return "Rare";
- return "Common";
+function updateStats() {
+  document.getElementById("essence").textContent = essence;
+  document.getElementById("total").textContent = inventory.length;
+}
+
+function setMessage(text) {
+  document.getElementById("message").textContent = text;
+}
+
+function randomRarity() {
+  const n = Math.random() * 100;
+  if (n < 0.2) return "Starlith";
+  if (n < 2) return "Mythic";
+  if (n < 8) return "Legendary";
+  if (n < 20) return "Epic";
+  if (n < 45) return "Rare";
+  return "Common";
+}
+
+function pickCard(pack) {
+  const rarity = randomRarity();
+  const options = cardData.filter(c => c.pack === pack && c.rarity === rarity);
+  const card = options[Math.floor(Math.random() * options.length)];
+  return {...card, id: Date.now() + "-" + Math.random().toString(36).slice(2)};
 }
 
 function openPack(pack) {
- if(essence < 100) {
-  document.getElementById("message").textContent =
-   "Você precisa de mais Essências para abrir este portal.";
-  return;
- }
- essence -= 100;
- const pulled = [];
- for(let i=0;i<5;i++) {
-  const rarity = chooseRarity();
-  let choices = allCards.filter(c=>c.pack===pack && c.rarity===rarity);
-  if(!choices.length) choices=allCards.filter(c=>c.pack===pack);
-  const card = choices[Math.floor(Math.random()*choices.length)];
-  pulled.push(card);
-  inventory.push({...card,id:Date.now()+"-"+Math.random()});
-  seen.add(card.name);
- }
- save();
- document.getElementById("collection").classList.remove("hidden");
- collectionOpen = true;
- document.getElementById("message").textContent =
-  "✨ Portal aberto! Você encontrou 5 cartas.";
- renderCards(pulled);
- document.getElementById("collection").scrollIntoView({behavior:"smooth"});
+  if (essence < 100) {
+    setMessage("Você não tem Essências suficientes. Pegue sua recompensa diária! ✨");
+    return;
+  }
+
+  essence -= 100;
+  lastPulls = [];
+
+  for (let i = 0; i < 5; i++) {
+    const card = pickCard(pack);
+    lastPulls.push(card);
+    inventory.push(card);
+    seen[card.name] = (seen[card.name] || 0) + 1;
+  }
+
+  saveGame();
+  document.getElementById("collectionTitle").textContent = "✨ Seu pacote foi aberto!";
+  renderCards(lastPulls);
+  setMessage("O portal se abriu! Você encontrou 5 cartas. Boa sorte, aventureiro!");
+  document.getElementById("collection").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function renderCards(list) {
- const area=document.getElementById("cards");
- area.innerHTML="";
- list.forEach(c=>{
-  const el=document.createElement("article");
-  el.className="card "+c.rarity;
-  const art = document.createElement("div");
-art.className = "art";
+  const area = document.getElementById("cards");
+  area.replaceChildren();
 
-if (c.name === "Dragão Esmeralda") {
-  const img = document.createElement("img");
-  img.src = "assets/dragao-esmeralda.png";
-  img.alt = "Dragão Esmeralda";
-  img.style.width = "100%";
-  img.style.height = "140px";
-  img.style.objectFit = "contain";
-  art.appendChild(img);
-} else {
-  art.textContent = c.art;
-}
-  const title=document.createElement("h3");
-  title.textContent=c.name;
-  const rarity=document.createElement("p");
-  rarity.textContent=rarityNames[c.rarity] || c.rarity;
-  el.append(art,title,rarity);
-  area.appendChild(el);
- });
+  if (!list.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "Nenhuma carta encontrada. Abra um pacote para começar!";
+    area.appendChild(empty);
+    return;
+  }
+
+  list.forEach((card, index) => {
+    const el = document.createElement("article");
+    el.className = "card " + card.rarity;
+    el.style.animationDelay = (index * 90) + "ms";
+
+    const art = document.createElement("div");
+    art.className = "card-art";
+    art.textContent = card.art;
+
+    const name = document.createElement("h3");
+    name.textContent = card.name;
+
+    const rarity = document.createElement("span");
+    rarity.className = "badge";
+    rarity.textContent = rarityLabels[card.rarity];
+
+    const count = document.createElement("p");
+    const amount = seen[card.name] || 0;
+    count.textContent = "Possuídas: " + amount;
+
+    el.append(art, name, rarity, count);
+    area.appendChild(el);
+  });
 }
 
 function showCollection() {
- collectionOpen=true;
- document.getElementById("collection").classList.remove("hidden");
- document.getElementById("message").textContent="";
- renderCards(inventory);
- document.getElementById("collection").scrollIntoView({behavior:"smooth"});
+  document.getElementById("collectionTitle").textContent = "📚 Minha coleção";
+  renderCards(inventory);
+  setMessage("Estas são todas as cartas que você colecionou.");
+  document.getElementById("collection").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-function showPacks() {
- collectionOpen=false;
- document.getElementById("collection").classList.add("hidden");
- document.getElementById("message").textContent="Escolha um portal para revelar novas cartas!";
- window.scrollTo({top:0,behavior:"smooth"});
+function showPortals() {
+  document.getElementById("collectionTitle").textContent = "✨ Cartas reveladas";
+  renderCards(lastPulls);
+  setMessage("Escolha um portal para descobrir novas cartas.");
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-update();
+function claimEssence() {
+  const today = new Date().toISOString().slice(0,10);
+  if (lastDaily === today) {
+    setMessage("Você já recebeu sua recompensa diária. Volte amanhã! 🌟");
+    return;
+  }
+  lastDaily = today;
+  essence += 200;
+  saveGame();
+  setMessage("Recompensa recebida: +200 Essências! Volte amanhã para mais.");
+}
+
+loadGame();
+updateStats();
+
+document.querySelectorAll(".booster[role='button']").forEach(el => {
+  el.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      el.click();
+    }
+  });
+});
 </script>
 </body>
-  </html>
-  
+</html>
