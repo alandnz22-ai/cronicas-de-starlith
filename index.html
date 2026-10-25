@@ -199,9 +199,20 @@ function renderCards(list) {
  list.forEach(c=>{
   const el=document.createElement("article");
   el.className="card "+c.rarity;
-  const art=document.createElement("div");
-  art.className="art";
-  art.textContent=c.art;
+  const art = document.createElement("div");
+art.className = "art";
+
+if (c.name === "Dragão Esmeralda") {
+  const img = document.createElement("img");
+  img.src = "assets/dragao-esmeralda.png";
+  img.alt = "Dragão Esmeralda";
+  img.style.width = "100%";
+  img.style.height = "140px";
+  img.style.objectFit = "contain";
+  art.appendChild(img);
+} else {
+  art.textContent = c.art;
+}
   const title=document.createElement("h3");
   title.textContent=c.name;
   const rarity=document.createElement("p");
