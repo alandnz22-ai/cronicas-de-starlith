@@ -5,7 +5,108 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Crônicas de Starlith</title>
-<style>
+
+.packs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pack.cosmic {
+  overflow: hidden;
+  padding: 14px;
+  border: 1px solid #7650a8;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #28133f, #100b1d);
+  box-shadow: 0 0 18px #6d32a522;
+}
+
+.booster {
+  position: relative;
+  overflow: hidden;
+  min-height: 255px;
+  padding: 20px 10px;
+  border: 3px solid #d9a34b;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  background:
+    radial-gradient(ellipse at center, #783ad5 0%, transparent 60%),
+    linear-gradient(145deg, #35105d, #100b25 55%, #542078);
+  box-shadow: inset 0 0 20px #e7b9ff55,
+              0 0 16px #9d4dff44;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.booster:active {
+  transform: scale(.96);
+  box-shadow: 0 0 28px #c77dff;
+}
+
+.booster::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #f5d28b;
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.booster-stars {
+  color: #ffe7a1;
+  font-size: 25px;
+  letter-spacing: 8px;
+  animation: starPulse 1.8s infinite alternate;
+}
+
+.booster-dragon {
+  margin: 18px 0;
+  font-size: 65px;
+  filter: drop-shadow(0 0 12px #c17bff);
+}
+
+.booster-title {
+  position: relative;
+  color: #ffe0a0;
+  font-family: Georgia, serif;
+  font-size: clamp(17px, 4vw, 23px);
+  font-weight: bold;
+  text-shadow: 0 0 12px #b36bff;
+}
+
+.booster-label {
+  margin-top: 15px;
+  padding: 7px 3px;
+  color: #fff0cb;
+  border-top: 1px solid #d9a34b;
+  border-bottom: 1px solid #d9a34b;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.booster.abyss {
+  background:
+    radial-gradient(ellipse at center, #3f279c, transparent 65%),
+    linear-gradient(145deg, #171b4c, #0a0a20 55%, #421565);
+  border-color: #9b8cff;
+}
+
+.booster.celestial {
+  background:
+    radial-gradient(ellipse at center, #875020, transparent 65%),
+    linear-gradient(145deg, #60401b, #211126 55%, #6c3260);
+}
+
+@keyframes starPulse {
+  from { opacity: .55; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1.05); }
+}
+
+@media (max-width: 360px) {
+  .packs { grid-template-columns: 1fr; }
+  .booster { min-height: 220px; }
+}
+  <style>
 *{box-sizing:border-box}
 body{margin:0;background:#100d1b;color:#f7edff;font-family:system-ui,Arial,sans-serif}
 header{text-align:center;padding:24px 12px;background:linear-gradient(135deg,#251446,#101020);border-bottom:1px solid #754ca0}
@@ -60,7 +161,48 @@ footer{text-align:center;color:#9585a8;font-size:12px;padding:25px}
   </div>
 
   <h2>Escolha seu portal</h2>
-  <div class="packs">
+  
+<div class="packs">
+  <div class="pack cosmic">
+    <div class="booster" onclick="openPack(0)">
+      <div class="booster-stars">✦ ✧ ✦</div>
+      <div class="booster-dragon">🐉</div>
+      <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
+      <div class="booster-label">PACOTE DE CARTAS</div>
+      <div class="booster-glow"></div>
+    </div>
+    <h3>🌳 Ecos da Floresta</h3>
+    <p>Elfos, druidas e feras antigas.</p>
+    <button onclick="openPack(0)">Abrir · 100 ✨</button>
+  </div>
+
+  <div class="pack cosmic">
+    <div class="booster abyss" onclick="openPack(1)">
+      <div class="booster-stars">✦ ✧ ✦</div>
+      <div class="booster-dragon">🦑</div>
+      <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
+      <div class="booster-label">PACOTE DE CARTAS</div>
+      <div class="booster-glow"></div>
+    </div>
+    <h3>🌑 Chamado do Abismo</h3>
+    <p>Monstros, sombras e magia proibida.</p>
+    <button onclick="openPack(1)">Abrir · 100 ✨</button>
+  </div>
+
+  <div class="pack cosmic">
+    <div class="booster celestial" onclick="openPack(2)">
+      <div class="booster-stars">✦ ✧ ✦</div>
+      <div class="booster-dragon">👑</div>
+      <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
+      <div class="booster-label">PACOTE DE CARTAS</div>
+      <div class="booster-glow"></div>
+    </div>
+    <h3>☀️ Trono Celestial</h3>
+    <p>Dragões, campeões e deuses.</p>
+    <button onclick="openPack(2)">Abrir · 100 ✨</button>
+  </div>
+</div>
+  
     <div class="pack">
       <div class="symbol">🌳</div>
       <h3>Ecos da Floresta</h3>
