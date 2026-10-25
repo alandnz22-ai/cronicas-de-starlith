@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crônicas de Starlith</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100d1b;color:#f7edff;font-family:system-ui,Arial,sans-serif}
+header{text-align:center;padding:24px 12px;background:linear-gradient(135deg,#251446,#101020);border-bottom:1px solid #754ca0}
+h1{color:#e4c6ff;margin:5px;font-size:clamp(25px,6vw,38px)}
+header p{color:#c8b5df}
+main{max-width:900px;margin:auto;padding:16px}
+.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:15px 0}
+.pill{background:#251c38;border:1px solid #61417f;border-radius:20px;padding:9px 15px}
+h2{text-align:center;color:#e4c6ff}
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.pack{background:#1b142b;border:1px solid #624184;border-radius:14px;padding:15px 10px;text-align:center}
+.pack .symbol{font-size:48px}
+.pack h3{margin:8px 0}
+button{background:#8651c7;color:white;border:0;border-radius:10px;padding:12px;font-weight:bold;cursor:pointer}
+button:active{transform:scale(.97)}
+.pack button{width:100%}
+button:disabled{opacity:.45}
+.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.actions button{background:#332444}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
+.card{position:relative;text-align:center;background:linear-gradient(155deg,#302044,#15111f);border:2px solid #65527b;border-radius:13px;padding:12px 8px;min-width:0;overflow:hidden}
+.art{font-size:58px;padding:12px 0}
+.card h3{font-size:16px;margin:5px 0}
+.card p{font-size:12px;color:#d1c2e0}
+.Common{border-color:#777}
+.Rare{border-color:#43b9dc}
+.Epic{border-color:#b16bff}
+.Legendary{border-color:#ffb83f;box-shadow:0 0 10px #a66b25}
+.Mythic{border-color:#ff5d9e;box-shadow:0 0 12px #9e316b}
+.Starlith{border-color:#e4c7ff;box-shadow:0 0 20px #b77cff;background:linear-gradient(145deg,#4c2873,#17102d,#543c72);animation:shine 2s infinite alternate}
+@keyframes shine{from{box-shadow:0 0 8px #9c6dd8}to{box-shadow:0 0 24px #e5c7ff}}
+.hidden{display:none!important}
+#message{text-align:center;min-height:26px;color:#e6d0ff}
+footer{text-align:center;color:#9585a8;font-size:12px;padding:25px}
+</style>
+</head>
+<body>
+<header>
+  <div style="font-size:38px">🌌🐉✨</div>
+  <h1>Crônicas de Starlith</h1>
+  <p>Abra portais. Colecione lendas. Descubra seu destino.</p>
+</header>
+<main>
+  <div class="stats">
+    <div class="pill">✨ Essências: <b id="essence">250</b></div>
+    <div class="pill">📜 Cartas: <b id="total">0</b></div>
+  </div>
+
+  <h2>Escolha seu portal</h2>
+  <div class="packs">
+    <div class="pack">
+      <div class="symbol">🌳</div>
+      <h3>Ecos da Floresta</h3>
+      <p>Elfos, druidas e feras antigas.</p>
+      <button onclick="openPack(0)">Abrir · 100 ✨</button>
+    </div>
+    <div class="pack">
+      <div class="symbol">🦑</div>
+      <h3>Chamado do Abismo</h3>
+      <p>Monstros, sombras e magia proibida.</p>
+      <button onclick="openPack(1)">Abrir · 100 ✨</button>
+    </div>
+    <div class="pack">
+      <div class="symbol">👑</div>
+      <h3>Trono Celestial</h3>
+      <p>Dragões, campeões e deuses.</p>
+      <button onclick="openPack(2)">Abrir · 100 ✨</button>
+    </div>
+  </div>
+
+  <p id="message" aria-live="polite"></p>
+  <div class="actions">
+    <button onclick="showCollection()">📚 Minha coleção</button>
+    <button onclick="showPacks()">✨ Portais</button>
+  </div>
+
+  <section id="collection" class="hidden">
+    <h2>Minha coleção</h2>
+    <p style="text-align:center">As cartas que você descobriu nesta aventura.</p>
+    <div id="cards" class="cards"></div>
+  </section>
+</main>
+<footer>Crônicas de Starlith · Sua lenda começa aqui.</footer>
+
+<script>
+const allCards = [
+ {name:"Lyria, Guardiã Verde",art:"🧝‍♀️",rarity:"Common",pack:0},
+ {name:"Lobo de Musgo",art:"🐺",rarity:"Common",pack:0},
+ {name:"Aprendiz Druida",art:"🌿",rarity:"Common",pack:0},
+ {name:"Fada das Raízes",art:"🧚",rarity:"Rare",pack:0},
+ {name:"Arqueiro Élfico",art:"🏹",rarity:"Rare",pack:0},
+ {name:"Ent Ancestral",art:"🌲",rarity:"Epic",pack:0},
+ {name:"Unicórnio Lunar",art:"🦄",rarity:"Epic",pack:0},
+ {name:"Dragão Esmeralda",art:"🐉",rarity:"Legendary",pack:0},
+ {name:"Rainha da Floresta",art:"👸",rarity:"Mythic",pack:0},
+ {name:"Sylvaris, Alma Estelar",art:"🌟",rarity:"Starlith",pack:0},
+
+ {name:"Espectro Perdido",art:"👻",rarity:"Common",pack:1},
+ {name:"Caranguejo Sombrio",art:"🦀",rarity:"Common",pack:1},
+ {name:"Cultista do Vazio",art:"🕯️",rarity:"Common",pack:1},
+ {name:"Serpente Abissal",art:"🐍",rarity:"Rare",pack:1},
+ {name:"Cavaleiro das Trevas",art:"🛡️",rarity:"Rare",pack:1},
+ {name:"Kraken Ancião",art:"🦑",rarity:"Epic",pack:1},
+ {name:"Hidra das Profundezas",art:"🐲",rarity:"Epic",pack:1},
+ {name:"Devorador de Mundos",art:"👹",rarity:"Legendary",pack:1},
+ {name:"Imperador do Abismo",art:"💀",rarity:"Mythic",pack:1},
+ {name:"Nox, O Inominável",art:"🌑",rarity:"Starlith",pack:1},
+
+ {name:"Escudeiro Real",art:"⚔️",rarity:"Common",pack:2},
+ {name:"Sacerdotisa Solar",art:"☀️",rarity:"Common",pack:2},
+ {name:"Grifo Celeste",art:"🦅",rarity:"Common",pack:2},
+ {name:"Mago das Estrelas",art:"🧙",rarity:"Rare",pack:2},
+ {name:"Paladina Radiante",art:"🗡️",rarity:"Rare",pack:2},
+ {name:"Titã das Nuvens",art:"🌩️",rarity:"Epic",pack:2},
+ {name:"Fênix Imperial",art:"🔥",rarity:"Epic",pack:2},
+ {name:"Dragão Solar",art:"🐲",rarity:"Legendary",pack:2},
+ {name:"Deusa do Firmamento",art:"🌠",rarity:"Mythic",pack:2},
+ {name:"Aureon, Primeiro Astro",art:"🌌",rarity:"Starlith",pack:2}
+];
+
+const rarityNames = {
+ Common:"Comum",Rare:"Rara",Epic:"Épica",
+ Legendary:"Lendária",Mythic:"Mítica",Starlith:"Starlith"
+};
+
+let essence = 250;
+let inventory = [];
+let seen = new Set();
+let collectionOpen = false;
+
+try {
+ const saved = JSON.parse(localStorage.getItem("starlithSave") || "{}");
+ if(Number.isFinite(saved.essence)) essence = saved.essence;
+ if(Array.isArray(saved.inventory)) inventory = saved.inventory;
+ if(Array.isArray(saved.seen)) seen = new Set(saved.seen);
+} catch(e) {}
+
+function save() {
+ try {
+  localStorage.setItem("starlithSave", JSON.stringify({
+   essence, inventory, seen:[...seen]
+  }));
+ } catch(e) {}
+ update();
+}
+
+function update() {
+ document.getElementById("essence").textContent = essence;
+ document.getElementById("total").textContent = inventory.length;
+}
+
+function chooseRarity() {
+ const r = Math.random()*100;
+ if(r < 0.2) return "Starlith";
+ if(r < 2) return "Mythic";
+ if(r < 8) return "Legendary";
+ if(r < 20) return "Epic";
+ if(r < 45) return "Rare";
+ return "Common";
+}
+
+function openPack(pack) {
+ if(essence < 100) {
+  document.getElementById("message").textContent =
+   "Você precisa de mais Essências para abrir este portal.";
+  return;
+ }
+ essence -= 100;
+ const pulled = [];
+ for(let i=0;i<5;i++) {
+  const rarity = chooseRarity();
+  let choices = allCards.filter(c=>c.pack===pack && c.rarity===rarity);
+  if(!choices.length) choices=allCards.filter(c=>c.pack===pack);
+  const card = choices[Math.floor(Math.random()*choices.length)];
+  pulled.push(card);
+  inventory.push({...card,id:Date.now()+"-"+Math.random()});
+  seen.add(card.name);
+ }
+ save();
+ document.getElementById("collection").classList.remove("hidden");
+ collectionOpen = true;
+ document.getElementById("message").textContent =
+  "✨ Portal aberto! Você encontrou 5 cartas.";
+ renderCards(pulled);
+ document.getElementById("collection").scrollIntoView({behavior:"smooth"});
+}
+
+function renderCards(list) {
+ const area=document.getElementById("cards");
+ area.innerHTML="";
+ list.forEach(c=>{
+  const el=document.createElement("article");
+  el.className="card "+c.rarity;
+  const art=document.createElement("div");
+  art.className="art";
+  art.textContent=c.art;
+  const title=document.createElement("h3");
+  title.textContent=c.name;
+  const rarity=document.createElement("p");
+  rarity.textContent=rarityNames[c.rarity] || c.rarity;
+  el.append(art,title,rarity);
+  area.appendChild(el);
+ });
+}
+
+function showCollection() {
+ collectionOpen=true;
+ document.getElementById("collection").classList.remove("hidden");
+ document.getElementById("message").textContent="";
+ renderCards(inventory);
+ document.getElementById("collection").scrollIntoView({behavior:"smooth"});
+}
+
+function showPacks() {
+ collectionOpen=false;
+ document.getElementById("collection").classList.add("hidden");
+ document.getElementById("message").textContent="Escolha um portal para revelar novas cartas!";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+update();
+</script>
+</body>
+  </html>
+  
