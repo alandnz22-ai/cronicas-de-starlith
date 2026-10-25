@@ -9,260 +9,221 @@
 
 <style>
 :root {
-  --bg: #100b1b;
-  --panel: #1c122c;
-  --purple: #914ee8;
-  --gold: #f4c66c;
-  --text: #fff4ff;
+  --bg:#10091b;
+  --panel:#21132f;
+  --purple:#914ee8;
+  --gold:#f5d18a;
+  --text:#fff4ff;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, Arial, sans-serif;
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,Arial,sans-serif
 }
-button { font: inherit; cursor: pointer; }
-header {
-  text-align: center;
-  padding: 30px 14px 24px;
-  background:
-    radial-gradient(ellipse at 50% 0%, #6731a5 0%, transparent 60%),
-    linear-gradient(145deg, #291343, #100b1b);
-  border-bottom: 1px solid #71449a;
+button{font:inherit;cursor:pointer}
+header{
+  text-align:center;padding:28px 14px;
+  background:radial-gradient(ellipse at top,#69329b,transparent 70%),
+  linear-gradient(145deg,#29133f,#10091b);
+  border-bottom:1px solid #704398
 }
-.logo { font-size: 38px; }
-h1 {
-  margin: 6px 0;
-  font-family: Georgia, serif;
-  font-size: clamp(26px, 7vw, 40px);
-  color: #f2d5ff;
-  text-shadow: 0 0 18px #a85cff;
+.logo{font-size:38px}
+h1{
+  margin:8px 0;color:#f1d4ff;
+  font-family:Georgia,serif;font-size:clamp(27px,7vw,40px);
+  text-shadow:0 0 18px #b16bff
 }
-header p { color: #d3b9e9; margin-bottom: 0; }
-main { max-width: 1000px; margin: auto; padding: 16px; }
-.stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 12px 0 24px;
+header p{color:#d8bde9}
+main{max-width:1000px;margin:auto;padding:15px}
+.stats{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:10px;margin:12px 0 25px
 }
-.pill {
-  background: #291a3d;
-  border: 1px solid #79519b;
-  border-radius: 25px;
-  padding: 10px 15px;
+.pill{
+  background:#291a3d;border:1px solid #79519b;
+  border-radius:25px;padding:10px 15px
 }
-h2 {
-  text-align: center;
-  color: #e6c6ff;
-  font-family: Georgia, serif;
+h2{text-align:center;color:#e6c6ff;font-family:Georgia,serif}
+.packs{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px
 }
-.packs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+.pack{
+  min-width:0;padding:11px;border:1px solid #68428a;
+  border-radius:17px;text-align:center;
+  background:linear-gradient(155deg,#29183c,#120d20);
+  box-shadow:0 5px 18px #0005
 }
-.pack {
-  min-width: 0;
-  padding: 12px;
-  border: 1px solid #68428a;
-  border-radius: 17px;
-  text-align: center;
-  background: linear-gradient(155deg, #29183c, #120d20);
-  box-shadow: 0 5px 18px #0005;
+.pack h3{font-size:16px;margin:13px 0 7px}
+.pack p{font-size:13px;color:#cbb9db;min-height:34px}
+.booster{
+  position:relative;overflow:hidden;min-height:245px;padding:15px 8px;
+  border:3px solid #e4bd70;border-radius:12px;cursor:pointer;
+  background:radial-gradient(ellipse at center,#793dc0,transparent 60%),
+  linear-gradient(145deg,#3a165c,#10091e 60%,#56236e);
+  box-shadow:inset 0 0 24px #d7a2ff45,0 0 15px #8b45d744;
+  transition:transform .2s,box-shadow .2s
 }
-.pack h3 { font-size: 17px; margin: 15px 0 7px; }
-.pack p { color: #cbb9db; font-size: 13px; min-height: 35px; }
-.booster {
-  position: relative;
-  min-height: 235px;
-  overflow: hidden;
-  padding: 17px 8px;
-  border: 3px solid var(--gold);
-  border-radius: 11px;
-  background:
-    radial-gradient(ellipse at 50% 38%, #7838c8 0%, transparent 58%),
-    linear-gradient(150deg, #38165e, #10091e 60%, #55236e);
-  box-shadow: inset 0 0 24px #d7a2ff45, 0 0 13px #8b45d744;
-  transition: transform .2s, box-shadow .2s;
-  cursor: pointer;
+.booster:active{transform:scale(.96);box-shadow:0 0 28px #d09aff}
+.booster:before{
+  content:"";position:absolute;inset:7px;
+  border:1px solid #ffe3a0;border-radius:6px;pointer-events:none
 }
-.booster:active {
-  transform: scale(.96);
-  box-shadow: 0 0 28px #d09aff;
+.booster:after{
+  content:"✦  ✧  ✦";position:absolute;top:10px;left:0;right:0;
+  color:#ffe6a1;letter-spacing:7px;animation:twinkle 1.7s infinite alternate
 }
-.booster::before {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border: 1px solid #ffe3a0;
-  border-radius: 5px;
-  pointer-events: none;
+.booster-symbol{
+  font-size:63px;margin:30px 0 12px;
+  filter:drop-shadow(0 0 12px #d5a2ff);
+  animation:float 3s ease-in-out infinite
 }
-.booster::after {
-  content: "✦  ✧  ✦";
-  position: absolute;
-  top: 10px;
-  left: 0;
-  right: 0;
-  color: #ffe6a1;
-  letter-spacing: 7px;
-  animation: twinkle 1.7s infinite alternate;
+.booster-title{
+  color:#ffe1a0;font-family:Georgia,serif;font-weight:bold;
+  font-size:clamp(17px,4vw,23px);line-height:1.1;
+  text-shadow:0 0 12px #bb76ff
 }
-.booster-symbol {
-  font-size: 64px;
-  margin: 27px 0 12px;
-  filter: drop-shadow(0 0 12px #d5a2ff);
-  animation: float 3s ease-in-out infinite;
+.booster-label{
+  margin-top:14px;padding:7px 1px;
+  border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);
+  color:#fff0ca;font-size:10px;letter-spacing:2px
 }
-.booster-title {
-  color: #ffe1a0;
-  font-family: Georgia, serif;
-  font-weight: bold;
-  font-size: clamp(17px, 4vw, 23px);
-  line-height: 1.1;
-  text-shadow: 0 0 12px #bb76ff;
+.forest{
+  border-color:#81e0a3;
+  background:radial-gradient(ellipse at center,#23784c,transparent 62%),
+  linear-gradient(145deg,#164b37,#101323 60%,#245b45)
 }
-.booster-label {
-  margin-top: 13px;
-  padding: 7px 1px;
-  border-top: 1px solid var(--gold);
-  border-bottom: 1px solid var(--gold);
-  color: #fff0ca;
-  font-size: 10px;
-  letter-spacing: 2px;
+.abyss{
+  border-color:#a9a0ff;
+  background:radial-gradient(ellipse at center,#3b339a,transparent 62%),
+  linear-gradient(145deg,#1b1c52,#0c0a20 60%,#42165c)
 }
-.abyss {
-  border-color: #a9a0ff;
-  background:
-    radial-gradient(ellipse at center, #3b339a, transparent 62%),
-    linear-gradient(145deg, #1b1c52, #0c0a20 60%, #42165c);
+.celestial{
+  border-color:#ffe18a;
+  background:radial-gradient(ellipse at center,#95602a,transparent 62%),
+  linear-gradient(145deg,#63431c,#241127 60%,#683264)
 }
-.celestial {
-  border-color: #ffe18a;
-  background:
-    radial-gradient(ellipse at center, #95602a, transparent 62%),
-    linear-gradient(145deg, #63431c, #241127 60%, #683264);
+.primary,.secondary{
+  padding:12px;border-radius:10px;color:white;font-weight:bold
 }
-.forest {
-  background:
-    radial-gradient(ellipse at center, #23784c, transparent 62%),
-    linear-gradient(145deg, #164b37, #101323 60%, #245b45);
+.primary{
+  width:100%;border:1px solid #d9a7ff;
+  background:linear-gradient(100deg,#6733a6,#a052e5);
+  box-shadow:0 0 12px #883edb44
 }
-.primary {
-  width: 100%;
-  padding: 12px 8px;
-  border: 1px solid #d9a7ff;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  background: linear-gradient(100deg, #6733a6, #a052e5);
-  box-shadow: 0 0 12px #883edb44;
+.primary:disabled{opacity:.5}
+.secondary{border:1px solid #765092;background:#291a3d}
+.actions{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:9px;margin:22px 0
 }
-.primary:disabled { opacity: .45; cursor: not-allowed; }
-.secondary {
-  padding: 10px 14px;
-  border: 1px solid #765092;
-  border-radius: 9px;
-  background: #291a3d;
-  color: #f7eaff;
+#message{
+  min-height:28px;text-align:center;color:#e4c4ff;margin:15px 0
 }
-.actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin: 23px 0;
+.section-title{margin-top:30px}
+.cards{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+  perspective:1200px
 }
-#message {
-  min-height: 25px;
-  text-align: center;
-  color: #e4c4ff;
-  margin: 15px 0;
+.card{
+  min-width:0;overflow:hidden;padding:11px 8px;border:2px solid #777;
+  border-radius:13px;text-align:center;
+  background:linear-gradient(155deg,#30213f,#15101f);
+  animation:reveal .45s ease both
 }
-.section-title { margin-top: 30px; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+.card-art{
+  display:flex;align-items:center;justify-content:center;
+  height:112px;font-size:60px
 }
-.card {
-  min-width: 0;
-  overflow: hidden;
-  padding: 11px 8px;
-  border: 2px solid #777;
-  border-radius: 13px;
-  text-align: center;
-  background: linear-gradient(155deg, #30213f, #15101f);
-  animation: reveal .45s ease both;
+.card h3{font-size:15px;margin:7px 0}
+.card p{margin:7px 0;color:#d5c4e4;font-size:13px}
+.Common{border-color:#888}
+.Rare{border-color:#40bce9;box-shadow:0 0 10px #40bce922}
+.Epic{border-color:#b36aff;box-shadow:0 0 12px #9b4bff33}
+.Legendary{border-color:#ffc24e;box-shadow:0 0 14px #ffb62f44}
+.Mythic{border-color:#ff5fae;box-shadow:0 0 15px #ff388744}
+.Starlith{
+  border-color:#efd5ff;
+  background:linear-gradient(145deg,#532c78,#171027,#51366e);
+  box-shadow:0 0 20px #bd81ff88;
+  animation:starlithGlow 1.5s infinite alternate
 }
-.card-art {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 112px;
-  font-size: 60px;
-  filter: drop-shadow(0 0 8px #ffffff22);
+.badge{
+  display:inline-block;padding:4px 8px;border-radius:15px;
+  background:#ffffff12;font-size:11px;letter-spacing:.5px
 }
-.card h3 { font-size: 15px; margin: 7px 0; }
-.card p { margin: 7px 0; color: #d5c4e4; font-size: 13px; }
-.Common { border-color: #777; }
-.Rare { border-color: #40bce9; box-shadow: 0 0 10px #40bce922; }
-.Epic { border-color: #b36aff; box-shadow: 0 0 12px #9b4bff33; }
-.Legendary { border-color: #ffc24e; box-shadow: 0 0 14px #ffb62f44; }
-.Mythic { border-color: #ff5fae; box-shadow: 0 0 15px #ff388744; }
-.Starlith {
-  border-color: #efd5ff;
-  background: linear-gradient(145deg, #532c78, #171027, #51366e);
-  box-shadow: 0 0 20px #bd81ff88;
-  animation: starlithGlow 2s infinite alternate;
+.empty{grid-column:1/-1;padding:24px;color:#b9a5cc;text-align:center}
+
+/* REVELAÇÃO INDIVIDUAL */
+.reveal-stage{width:100%;max-width:350px;margin:auto;text-align:center}
+.card-counter{color:#f4d38b;letter-spacing:2px;margin-bottom:18px}
+.flip-card{
+  width:100%;height:390px;position:relative;
+  perspective:1000px;margin-bottom:20px
 }
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 15px;
-  background: #ffffff12;
-  font-size: 11px;
-  letter-spacing: .5px;
+.flip-inner{
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1)
 }
-.hidden { display: none !important; }
-.empty {
-  grid-column: 1 / -1;
-  padding: 24px;
-  color: #b9a5cc;
-  text-align: center;
+.flip-card.is-revealed .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{
+  position:absolute;inset:0;border-radius:18px;overflow:hidden;
+  border:3px solid #d7ad62;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden
 }
-footer {
-  text-align: center;
-  padding: 24px 12px;
-  color: #9682ab;
-  font-size: 12px;
+.flip-front{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:18px;
+  background:radial-gradient(circle,#713bb0,transparent 55%),
+  linear-gradient(145deg,#32164e,#0b0716);
+  box-shadow:0 0 28px #a85cff55,inset 0 0 25px #d3a2ff33
 }
-@keyframes twinkle {
-  from { opacity: .5; }
-  to { opacity: 1; text-shadow: 0 0 15px #fff; }
+.card-back-symbol{
+  width:76%;height:76%;display:flex;align-items:center;
+  justify-content:center;border:2px solid #e5c77f;border-radius:12px;
+  background:repeating-conic-gradient(#482466 0deg 15deg,#21102f 15deg 30deg);
+  box-shadow:inset 0 0 25px #a76bff66;font-size:76px;
+  color:#ffe3a0;text-shadow:0 0 20px #d7a4ff
 }
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+.flip-front p{color:#ffe1a1;font-family:Georgia,serif;letter-spacing:2px}
+.flip-back{
+  transform:rotateY(180deg);padding:18px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 35%,#4d286d,transparent 65%),
+  linear-gradient(145deg,#24132f,#100b1b);
+  box-shadow:0 0 24px #b77bff55
 }
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(12px) scale(.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.flip-back .card-art{height:175px;font-size:100px}
+.flip-back h3{font-size:22px;margin:12px 0}
+.flip-back .badge{margin-top:5px;font-size:13px}
+.flip-back.Rare{border-color:#40bce9}
+.flip-back.Epic{border-color:#b36aff}
+.flip-back.Legendary{border-color:#ffc24e}
+.flip-back.Mythic{border-color:#ff5fae}
+.flip-back.Starlith{
+  border-color:#f2d8ff;box-shadow:0 0 35px #d29aff;
+  background:radial-gradient(circle,#7040a2,transparent 65%),
+  linear-gradient(145deg,#35134f,#100b1b)
 }
-@keyframes starlithGlow {
-  from { box-shadow: 0 0 9px #a46bdb; }
-  to { box-shadow: 0 0 24px #edceff; }
+.reveal-button{width:100%;max-width:350px;padding:15px;font-size:17px}
+.flip-card.is-revealed .flip-back{animation:magicBurst .6s ease}
+footer{text-align:center;padding:24px 12px;color:#9682ab;font-size:12px}
+@keyframes twinkle{from{opacity:.5}to{opacity:1;text-shadow:0 0 15px white}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes reveal{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes magicBurst{0%{transform:scale(.85);opacity:.4}100%{transform:scale(1);opacity:1}}
+@keyframes starlithGlow{from{box-shadow:0 0 9px #a46bdb}to{box-shadow:0 0 24px #edceff}}
+@media(min-width:600px){
+  .packs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-@media (min-width: 600px) {
-  .packs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media(max-width:350px){
+  .packs{grid-template-columns:1fr}
+  .booster{min-height:220px}
+  .flip-card{height:350px}
 }
-@media (max-width: 350px) {
-  .packs { grid-template-columns: 1fr; }
-  .booster { min-height: 220px; }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
@@ -284,7 +245,7 @@ footer {
 
   <div class="packs">
     <section class="pack">
-      <div class="booster forest" onclick="openPack(0)" role="button" tabindex="0" aria-label="Abrir booster Ecos da Floresta">
+      <div class="booster forest" onclick="openPack(0)" role="button" tabindex="0">
         <div class="booster-symbol">🐉</div>
         <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
         <div class="booster-label">PACOTE DE CARTAS</div>
@@ -295,7 +256,7 @@ footer {
     </section>
 
     <section class="pack">
-      <div class="booster abyss" onclick="openPack(1)" role="button" tabindex="0" aria-label="Abrir booster Chamado do Abismo">
+      <div class="booster abyss" onclick="openPack(1)" role="button" tabindex="0">
         <div class="booster-symbol">🦑</div>
         <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
         <div class="booster-label">PACOTE DE CARTAS</div>
@@ -306,7 +267,7 @@ footer {
     </section>
 
     <section class="pack">
-      <div class="booster celestial" onclick="openPack(2)" role="button" tabindex="0" aria-label="Abrir booster Trono Celestial">
+      <div class="booster celestial" onclick="openPack(2)" role="button" tabindex="0">
         <div class="booster-symbol">👑</div>
         <div class="booster-title">CRÔNICAS DE<br>STARLITH</div>
         <div class="booster-label">PACOTE DE CARTAS</div>
@@ -326,16 +287,14 @@ footer {
   </div>
 
   <section id="collection">
-    <h2 class="section-title" id="collectionTitle">✨ Cartas reveladas</h2>
+    <h2 id="collectionTitle" class="section-title">✨ Cartas reveladas</h2>
     <div id="cards" class="cards">
       <div class="empty">Suas próximas lendas serão reveladas aqui.</div>
     </div>
   </section>
 </main>
 
-<footer>
-  Crônicas de Starlith · Mais que cartas, são lendas.
-</footer>
+<footer>Crônicas de Starlith · Mais que cartas, são lendas.</footer>
 
 <script>
 const cardData = [
@@ -384,151 +343,240 @@ const rarityLabels = {
 
 let essence = 250;
 let inventory = [];
+let revealQueue = [];
+let revealIndex = 0;
 let lastPulls = [];
 let lastDaily = "";
 let seen = {};
 
-function loadGame() {
-  try {
-    const saved = JSON.parse(localStorage.getItem("starlithSave") || "{}");
-    if (Number.isFinite(saved.essence)) essence = saved.essence;
-    if (Array.isArray(saved.inventory)) inventory = saved.inventory;
-    if (saved.seen && typeof saved.seen === "object") seen = saved.seen;
-    if (typeof saved.lastDaily === "string") lastDaily = saved.lastDaily;
-  } catch (e) {
-    console.warn("Não foi possível carregar o progresso salvo.", e);
-  }
+function loadGame(){
+  try{
+    const saved=JSON.parse(localStorage.getItem("starlithSave")||"{}");
+    if(Number.isFinite(saved.essence)) essence=saved.essence;
+    if(Array.isArray(saved.inventory)) inventory=saved.inventory;
+    if(saved.seen&&typeof saved.seen==="object") seen=saved.seen;
+    if(typeof saved.lastDaily==="string") lastDaily=saved.lastDaily;
+  }catch(e){console.warn("Não foi possível carregar o progresso.",e)}
 }
 
-function saveGame() {
-  try {
-    localStorage.setItem("starlithSave", JSON.stringify({
-      essence, inventory, seen, lastDaily
+function saveGame(){
+  try{
+    localStorage.setItem("starlithSave",JSON.stringify({
+      essence,inventory,seen,lastDaily
     }));
-  } catch (e) {
-    setMessage("Não foi possível salvar no navegador. Verifique o espaço disponível.");
-  }
+  }catch(e){setMessage("Não foi possível salvar no navegador.")}
   updateStats();
 }
 
-function updateStats() {
-  document.getElementById("essence").textContent = essence;
-  document.getElementById("total").textContent = inventory.length;
+function updateStats(){
+  document.getElementById("essence").textContent=essence;
+  document.getElementById("total").textContent=inventory.length;
 }
 
-function setMessage(text) {
-  document.getElementById("message").textContent = text;
+function setMessage(text){
+  document.getElementById("message").textContent=text;
 }
 
-function randomRarity() {
-  const n = Math.random() * 100;
-  if (n < 0.2) return "Starlith";
-  if (n < 2) return "Mythic";
-  if (n < 8) return "Legendary";
-  if (n < 20) return "Epic";
-  if (n < 45) return "Rare";
+function randomRarity(){
+  const n=Math.random()*100;
+  if(n<0.2)return "Starlith";
+  if(n<2)return "Mythic";
+  if(n<8)return "Legendary";
+  if(n<20)return "Epic";
+  if(n<45)return "Rare";
   return "Common";
 }
 
-function pickCard(pack) {
-  const rarity = randomRarity();
-  const options = cardData.filter(c => c.pack === pack && c.rarity === rarity);
-  const card = options[Math.floor(Math.random() * options.length)];
-  return {...card, id: Date.now() + "-" + Math.random().toString(36).slice(2)};
+function pickCard(pack){
+  const rarity=randomRarity();
+  let options=cardData.filter(c=>c.pack===pack&&c.rarity===rarity);
+  if(!options.length) options=cardData.filter(c=>c.pack===pack);
+  const card=options[Math.floor(Math.random()*options.length)];
+  return {...card,id:Date.now()+"-"+Math.random().toString(36).slice(2)};
 }
 
-function openPack(pack) {
-  if (essence < 100) {
+function openPack(pack){
+  if(essence<100){
     setMessage("Você não tem Essências suficientes. Pegue sua recompensa diária! ✨");
     return;
   }
 
-  essence -= 100;
-  lastPulls = [];
-
-  for (let i = 0; i < 5; i++) {
-    const card = pickCard(pack);
-    lastPulls.push(card);
+  essence-=100;
+  revealQueue=[];
+  for(let i=0;i<5;i++){
+    const card=pickCard(pack);
+    revealQueue.push(card);
     inventory.push(card);
-    seen[card.name] = (seen[card.name] || 0) + 1;
+    seen[card.name]=(seen[card.name]||0)+1;
   }
 
+  lastPulls=revealQueue.slice();
+  revealIndex=0;
   saveGame();
-  document.getElementById("collectionTitle").textContent = "✨ Seu pacote foi aberto!";
-  renderCards(lastPulls);
-  setMessage("O portal se abriu! Você encontrou 5 cartas. Boa sorte, aventureiro!");
-  document.getElementById("collection").scrollIntoView({behavior:"smooth",block:"start"});
+
+  document.getElementById("collectionTitle").textContent="✨ Revelação misteriosa";
+  renderOneCard();
+  document.getElementById("collection").scrollIntoView({
+    behavior:"smooth",block:"start"
+  });
 }
 
-function renderCards(list) {
-  const area = document.getElementById("cards");
+function renderOneCard(){
+  const area=document.getElementById("cards");
   area.replaceChildren();
 
-  if (!list.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "Nenhuma carta encontrada. Abra um pacote para começar!";
+  if(revealIndex>=revealQueue.length){
+    document.getElementById("collectionTitle").textContent="🏆 Pacote concluído!";
+    renderCards(revealQueue);
+    setMessage("Todas as cinco cartas foram reveladas! Abra outro portal para continuar.");
+    return;
+  }
+
+  const card=revealQueue[revealIndex];
+  const stage=document.createElement("div");
+  stage.className="reveal-stage";
+
+  const counter=document.createElement("p");
+  counter.className="card-counter";
+  counter.textContent="✦ CARTA "+(revealIndex+1)+" DE "+revealQueue.length+" ✦";
+
+  const flip=document.createElement("div");
+  flip.className="flip-card";
+
+  const inner=document.createElement("div");
+  inner.className="flip-inner";
+
+  const front=document.createElement("div");
+  front.className="flip-front";
+
+  const backSymbol=document.createElement("div");
+  backSymbol.className="card-back-symbol";
+  backSymbol.textContent="✦";
+
+  const frontText=document.createElement("p");
+  frontText.textContent="CRÔNICAS DE STARLITH";
+  front.append(backSymbol,frontText);
+
+  const back=document.createElement("div");
+  back.className="flip-back "+card.rarity;
+
+  const art=document.createElement("div");
+  art.className="card-art";
+  art.textContent=card.art;
+
+  const name=document.createElement("h3");
+  name.textContent=card.name;
+
+  const rarity=document.createElement("span");
+  rarity.className="badge";
+  rarity.textContent=rarityLabels[card.rarity];
+
+  back.append(art,name,rarity);
+  inner.append(front,back);
+  flip.appendChild(inner);
+
+  const button=document.createElement("button");
+  button.className="primary reveal-button";
+  button.textContent="✨ REVELAR CARTA";
+
+  let revealed=false;
+  button.onclick=()=>{
+    if(!revealed){
+      revealed=true;
+      flip.classList.add("is-revealed");
+      button.textContent=revealIndex===revealQueue.length-1
+        ?"🏆 VER RESULTADO FINAL"
+        :"✦ REVELAR PRÓXIMA CARTA";
+
+      if(card.rarity==="Starlith"){
+        setMessage("🌌 INCRÍVEL! UMA CARTA STARLITH!");
+      }else if(card.rarity==="Mythic"||card.rarity==="Legendary"){
+        setMessage("✨ Grande descoberta: "+card.name+"!");
+      }else{
+        setMessage("Você descobriu "+card.name+"!");
+      }
+      return;
+    }
+
+    revealIndex++;
+    renderOneCard();
+  };
+
+  stage.append(counter,flip,button);
+  area.appendChild(stage);
+  setMessage("O verso da carta brilha... o que está escondido?");
+}
+
+function renderCards(list){
+  const area=document.getElementById("cards");
+  area.replaceChildren();
+
+  if(!list.length){
+    const empty=document.createElement("div");
+    empty.className="empty";
+    empty.textContent="Nenhuma carta encontrada. Abra um pacote para começar!";
     area.appendChild(empty);
     return;
   }
 
-  list.forEach((card, index) => {
-    const el = document.createElement("article");
-    el.className = "card " + card.rarity;
-    el.style.animationDelay = (index * 90) + "ms";
+  list.forEach((card,index)=>{
+    const el=document.createElement("article");
+    el.className="card "+card.rarity;
+    el.style.animationDelay=(index*100)+"ms";
 
-    const art = document.createElement("div");
-    art.className = "card-art";
-    art.textContent = card.art;
+    const art=document.createElement("div");
+    art.className="card-art";
+    art.textContent=card.art;
 
-    const name = document.createElement("h3");
-    name.textContent = card.name;
+    const name=document.createElement("h3");
+    name.textContent=card.name;
 
-    const rarity = document.createElement("span");
-    rarity.className = "badge";
-    rarity.textContent = rarityLabels[card.rarity];
+    const rarity=document.createElement("span");
+    rarity.className="badge";
+    rarity.textContent=rarityLabels[card.rarity];
 
-    const count = document.createElement("p");
-    const amount = seen[card.name] || 0;
-    count.textContent = "Possuídas: " + amount;
+    const count=document.createElement("p");
+    count.textContent="Possuídas: "+(seen[card.name]||0);
 
-    el.append(art, name, rarity, count);
+    el.append(art,name,rarity,count);
     area.appendChild(el);
   });
 }
 
-function showCollection() {
-  document.getElementById("collectionTitle").textContent = "📚 Minha coleção";
+function showCollection(){
+  document.getElementById("collectionTitle").textContent="📚 Minha coleção";
   renderCards(inventory);
   setMessage("Estas são todas as cartas que você colecionou.");
-  document.getElementById("collection").scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("collection").scrollIntoView({
+    behavior:"smooth",block:"start"
+  });
 }
 
-function showPortals() {
-  document.getElementById("collectionTitle").textContent = "✨ Cartas reveladas";
+function showPortals(){
+  document.getElementById("collectionTitle").textContent="✨ Cartas reveladas";
   renderCards(lastPulls);
   setMessage("Escolha um portal para descobrir novas cartas.");
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function claimEssence() {
-  const today = new Date().toISOString().slice(0,10);
-  if (lastDaily === today) {
+function claimEssence(){
+  const today=new Date().toLocaleDateString("en-CA");
+  if(lastDaily===today){
     setMessage("Você já recebeu sua recompensa diária. Volte amanhã! 🌟");
     return;
   }
-  lastDaily = today;
-  essence += 200;
+  lastDaily=today;
+  essence+=200;
   saveGame();
-  setMessage("Recompensa recebida: +200 Essências! Volte amanhã para mais.");
+  setMessage("🎁 Recompensa recebida: +200 Essências!");
 }
 
 loadGame();
 updateStats();
 
-document.querySelectorAll(".booster[role='button']").forEach(el => {
-  el.addEventListener("keydown", event => {
-    if (event.key === "Enter" || event.key === " ") {
+document.querySelectorAll(".booster[role='button']").forEach(el=>{
+  el.addEventListener("keydown",event=>{
+    if(event.key==="Enter"||event.key===" "){
       event.preventDefault();
       el.click();
     }
@@ -536,4 +584,5 @@ document.querySelectorAll(".booster[role='button']").forEach(el => {
 });
 </script>
 </body>
-</html>
+  </html>
+  
